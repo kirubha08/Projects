@@ -77,8 +77,7 @@ const AddEditEmployeePage = () => {
         emergencyContact: employee.emergencyContact || '',
         emergencyPhone: employee.emergencyPhone || '',
       })
-    }git config --global user.name "Kirubha"
-git config --global user.email "kirubha@gmail.com"
+    }
   }, [employee, isEdit, reset])
 
   const handleNext = async () => {
