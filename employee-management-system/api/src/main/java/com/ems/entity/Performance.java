@@ -28,7 +28,7 @@ public class Performance {
 
     private String period;
 
-    @Column(precision = 5, scale = 2)
+    @Column(precision = 5)
     private Double score;
 
     @Column(columnDefinition = "TEXT")

@@ -29,16 +29,16 @@ public class Payroll {
     @Column(nullable = false)
     private Integer year;
 
-    @Column(name = "basic_salary", precision = 15, scale = 2)
+    @Column(name = "basic_salary", precision = 15)
     private BigDecimal basicSalary;
 
-    @Column(precision = 15, scale = 2)
+    @Column(precision = 15)
     private BigDecimal allowances;
 
-    @Column(precision = 15, scale = 2)
+    @Column(precision = 15)
     private BigDecimal deductions;
 
-    @Column(name = "net_salary", precision = 15, scale = 2)
+    @Column(name = "net_salary", precision = 15)
     private BigDecimal netSalary;
 
     private String status;

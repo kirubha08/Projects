@@ -65,7 +65,7 @@ const AddEditEmployeePage = () => {
         phone: employee.phone || '',
         dateOfBirth: employee.dateOfBirth ? employee.dateOfBirth.split('T')[0] : '',
         gender: employee.gender || '',
-        departmentId: employee.departmentId ? String(employee.departmentId) : '',
+        departmentId:  '',
         designation: employee.designation || '',
         employmentType: employee.employmentType || '',
         joiningDate: employee.joiningDate ? employee.joiningDate.split('T')[0] : '',
@@ -77,7 +77,8 @@ const AddEditEmployeePage = () => {
         emergencyContact: employee.emergencyContact || '',
         emergencyPhone: employee.emergencyPhone || '',
       })
-    }
+    }git config --global user.name "Kirubha"
+git config --global user.email "kirubha@gmail.com"
   }, [employee, isEdit, reset])
 
   const handleNext = async () => {

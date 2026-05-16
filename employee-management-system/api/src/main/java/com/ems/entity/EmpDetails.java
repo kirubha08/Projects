@@ -37,6 +37,6 @@ public class EmpDetails {
     @Column(name = "employment_type")
     private String employmentType;
 
-    @Column(precision = 15, scale = 2)
+    @Column(precision = 15)
     private BigDecimal salary;
 }

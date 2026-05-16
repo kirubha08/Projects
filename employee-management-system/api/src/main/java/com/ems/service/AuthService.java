@@ -29,7 +29,7 @@ public class AuthService {
 
     @Transactional
     public AuthResponse register(RegisterRequest request) {
-        if (userRepository.existsByUsername(request.getUsername())) {
+        if (userRepository.existsByUsername(request.getEmail())) {
             throw new ApiException("Username already exists", HttpStatus.BAD_REQUEST);
         }
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -37,7 +37,7 @@ public class AuthService {
         }
 
         User user = User.builder()
-                .username(request.getUsername())
+                .username(request.getEmail())
                 .email(request.getEmail())
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole() != null ? request.getRole() : User.Role.EMPLOYEE)
@@ -45,7 +45,7 @@ public class AuthService {
                 .build();
 
         user = userRepository.save(user);
-        log.info("New user registered: {}", user.getUsername());
+        log.info("New user registered: {}", user.getEmail());
 
         String accessToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
@@ -54,16 +54,16 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
 
-        User user = userRepository.findByUsername(request.getUsername())
-                .or(() -> userRepository.findByEmail(request.getUsername()))
+        User user = userRepository.findByUsername(request.getEmail())
+                .or(() -> userRepository.findByEmail(request.getEmail()))
                 .orElseThrow(() -> new ApiException("User not found", HttpStatus.NOT_FOUND));
 
         String accessToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
-        log.info("User logged in: {}", user.getUsername());
+        log.info("User logged in: {}", user.getEmail());
         return AuthResponse.of(accessToken, refreshToken, user);
     }
 

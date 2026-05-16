@@ -26,7 +26,7 @@ public class AuthController {
     @PostMapping("/register")
     @Operation(summary = "Register a new user")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
-        log.info("Register request for username: {}", request.getUsername());
+        log.info("Register request for username: {}", request.getFirstName());
         AuthResponse response = authService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -34,7 +34,7 @@ public class AuthController {
     @PostMapping("/login")
     @Operation(summary = "Login with username and password")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
-        log.info("Login request for username: {}", request.getUsername());
+        log.info("Login request for username: {}", request.getEmail());
         AuthResponse response = authService.login(request);
         return ResponseEntity.ok(response);
     }
